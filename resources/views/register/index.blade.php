@@ -5,18 +5,14 @@
 <div class="row justify-content-center">
   <div class="col-md-4">
     <main class="form-registration">
-      
        <img width="100" height="67" src="{{ ('img/logo.png') }}" class="mx-auto d-block mb-3 " > 
-        
       <form class=" needs-validation" novalidate>
-    
         <div class="form-floating">
           <input type="text" name="picname" class="form-control" id="picname" placeholder="picname" required>
           <div class="invalid-tooltip">
             Please input PIC Name
           </div>
           <label for="picname">PIC Name</label>
-          
         </div>
         <div class="form-floating">
           <input type="text" name="companyname" class="form-control" id="companyname" placeholder="companyname" required>
@@ -32,60 +28,53 @@
           </div>
           <label for="floatingInput">Email </label>
         </div>
-        
           <div class="mb-2">
-        <select class="form-select"  type="group" required>
-         
-          <option selected disabled value="">Service Group</option>
-          <option value="1">Shared</option>
-          <option value="2">Dedicated</option>
-          <option value="3">OnPrem</option>
+        <select class="form-select"  type="group" name="group" id="main_menu" required>
+          <option selected disabled value="">Select Group</option>
+          <option value="Shared">Shared</option>
+          <option value="Dedicated">Dedicated</option>
+          <option value="Onprem">OnPrem</option>
         </select>
-       
+        <div  class="invalid-feedback">
+          Please select a valid state.
+        </div>
         </div>
         <div class="mb-2">
-          <select class="form-select"  type="group" required>
-           
-            <option selected disabled value="">Service Type</option>
-            <option value="1">FAQ</option>
-            <option value="2">Transactional</option>
+          <select class="form-select"  type="group"  name="type" id="sub_menu" required>
           </select>
           </div>
-
-
-          
-          <div class="mb-2">
+          <div class="mb-2"name="frm" >
             <label>Channels :</label>
             <br>
-            <div class="form-check form-check-inline">
+            <div class="form-check form-check-inline" >
               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" >
-              <label class="form-check-label" for="inlineCheckbox1">WhatsApp</label>
+              <label class="form-check-label" for="inlineCheckbox1" >WhatsApp</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" >
               <label class="form-check-label" for="inlineCheckbox2">Telegram</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
               <label class="form-check-label" for="inlineCheckbox3">Slack</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-              <label class="form-check-label" for="inlineCheckbox4">Coster</label>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" >
+              <label class="form-check-label" for="inlineCheckbox4"  >Coster</label>
             </div>
+
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-              <label class="form-check-label" for="inlineCheckbox5">Custom</label>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5"  onclick="checkMe()"/>
+              <label class="form-check-label" for="inlineCheckbox5"  >Custom</label>
             </div>
           </div>
             <div class="form-floating">
-              <input type="text" name="channelname" class="form-control" id="channelname" placeholder="channelname" required disabled>
+              <input type="text" name="channelname" class="form-control" id="channelname" placeholder="channelname" style="display:none">
               <div class="invalid-tooltip">
                 Please input channel name
               </div>
               <label for="picname">Channel Name</label>
             </div>
-
         <div class="form-floating">
           <input type="password" name="password" class="form-control" id="pass" placeholder="Password" required>
           <div class="invalid-tooltip">
@@ -100,8 +89,7 @@
           </div>
           <label for="password1">Confirm Password</label>
         </div>
-        <div class="g-recaptcha " data-sitekey="6LfFuEwfAAAAADkEL5fx4KKvOLJwRiMN2_0JrnvH" required></div>
-
+       <div class="g-recaptcha " data-sitekey="6LcEIV4fAAAAAOdJAIdLDUiI5zddbIk8zzWHgM5W" required></div>
         <div>
         <button id="submit" class="w-100 btn btn-lg btn-primary mt-2" type="submit">Register</button>
         </div>
@@ -109,19 +97,10 @@
       <small class="d-block  p-2" >Back to <a href="/login">Login</a></small>
     </main>
 </div>
-
-
-
-
 <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
       form.addEventListener('submit', function (event) {
@@ -136,17 +115,7 @@
 })()
 </script>
 
-<script type="text/javascript">
-  $('#reload').click(function () {
-      $.ajax({
-          type: 'GET',
-          url: 'reload-captcha',
-          success: function (data) {
-              $(".captcha span").html(data.captcha);
-          }
-      });
-  });
-</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
 	$(document).ready(function(){
@@ -160,6 +129,45 @@
 	});
 </script>
 
+
+  <script>
+    var group = {
+    select: ['Bebas'],
+    Shared: ['FAQ'],
+    Dedicated: ['Transactional'],
+    Onprem: ['Transactional']
+}
+
+var main = document.getElementById('main_menu');
+var sub = document.getElementById('sub_menu');
+
+main.addEventListener('change', function () {
+
+    var selected_option = group[this.value];
+
+    while (sub.options.length > 0) {
+        sub.options.remove(0);
+    }
+
+    Array.from(selected_option).forEach(function (el) {
+        let option = new Option(el, el);
+        sub.appendChild(option);
+    });
+});
+
+  </script>
+
+  <script>
+    function checkMe(){
+      var cb = document.getElementById("inlineCheckbox5");
+      var text = document.getElementById("channelname");
+      if (cb.checked==true){
+        text.style.display="block";
+      }else {
+        text.style.display="none";
+      }
+    }
+  </script>
 
 
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -10,7 +11,20 @@ class RegisterController extends Controller
     {
         return view('register.index', [
             'title' => 'Register',
-            'active' => 'register'
+            'active' => 'register',
+
+
+
+        ]);
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
+
         ]);
     }
 }
