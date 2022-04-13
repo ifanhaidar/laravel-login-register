@@ -3,90 +3,106 @@
 @section('container')
 
 <div class="row justify-content-center">
-  <div class="col-md-4">
+  <div class="col-lg-4">
     <main class="form-registration">
        <img width="100" height="67" src="{{ ('img/logo.png') }}" class="mx-auto d-block mb-3 " > 
-      <form class=" needs-validation" novalidate>
+      <form class=" needs-validation" novalidate action="/register" method="post">
+        @csrf
         <div class="form-floating">
-          <input type="text" name="picname" class="form-control" id="picname" placeholder="picname" required>
+          <input type="text" name="picname" class="form-control " id="picname" placeholder="picname" required value="{{ old('picname') }}">
+         
           <div class="invalid-tooltip">
             Please input PIC Name
           </div>
+         
           <label for="picname">PIC Name</label>
         </div>
         <div class="form-floating">
-          <input type="text" name="companyname" class="form-control" id="companyname" placeholder="companyname" required>
+          <input type="text" name="companyname" class="form-control " id="companyname" placeholder="companyname" required value="{{ old('companyname') }}">
+         
           <div class="invalid-tooltip">
             Please input Company Name
           </div>
+          
           <label for="companyname">Company Name</label>
         </div>
         <div class="form-floating">
-          <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+          <input type="email" name="email" class="form-control " id="email" placeholder="name@example.com" required value="{{ old('email') }}">
+        
           <div class="invalid-tooltip">
             Please input Email
           </div>
+         
           <label for="floatingInput">Email </label>
         </div>
           <div class="mb-2">
-        <select class="form-select"  type="group" name="group" id="main_menu" required>
+        <select class="form-select "  type="group" name="group" id="main_menu" required value="{{ old('group') }}">
           <option selected disabled value="">Select Group</option>
           <option value="Shared">Shared</option>
           <option value="Dedicated">Dedicated</option>
           <option value="Onprem">OnPrem</option>
         </select>
-        <div  class="invalid-feedback">
+      
+        <div  class="invalid-feedback" >
           Please select a valid state.
         </div>
+       
         </div>
         <div class="mb-2">
-          <select class="form-select"  type="group"  name="type" id="sub_menu" required>
+          <select class="form-select"  type="group"  name="type" id="sub_menu" required value="{{ old('type') }}">
           </select>
           </div>
-          <div class="mb-2"name="frm" >
+          <div class="mb-2"name="frm"  >
             <label>Channels :</label>
             <br>
             <div class="form-check form-check-inline" >
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" >
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="channel" >
               <label class="form-check-label" for="inlineCheckbox1" >WhatsApp</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" >
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="channel">
               <label class="form-check-label" for="inlineCheckbox2">Telegram</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" name="channel">
               <label class="form-check-label" for="inlineCheckbox3">Slack</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" >
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" name="channel">
               <label class="form-check-label" for="inlineCheckbox4"  >Coster</label>
             </div>
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5"  onclick="checkMe()"/>
-              <label class="form-check-label" for="inlineCheckbox5"  >Custom</label>
+              <label class="form-check-label" for="inlineCheckbox5" name="channel" >Custom</label>
             </div>
           </div>
             <div class="form-floating">
-              <input type="text" name="channelname" class="form-control" id="channelname" placeholder="channelname" style="display:none">
+              <input type="text" name="channelname" class="form-control " id="channelname" placeholder="channelname" style="display:none" >
+             
               <div class="invalid-tooltip">
                 Please input channel name
               </div>
-              <label for="picname">Channel Name</label>
+              <label for="channelname">Channel Name Custom</label>
             </div>
+
+
         <div class="form-floating">
-          <input type="password" name="password" class="form-control" id="pass" placeholder="Password" required>
+          <input type="password" name="password" class="form-control " id="pass"  placeholder="Password" required >
+         
           <div class="invalid-tooltip">
             Please input password
           </div>
+          
           <label for="password">Password</label>
         </div>
         <div class="form-floating">
-          <input type="password" name="password1" class="form-control" id="pass2" placeholder="Password1" required>
+          <input type="password" name="password1" class="form-control " id="pass2" placeholder="Password1" required >
+          
           <div class="invalid-tooltip">
             Please input confirm password
           </div>
+         
           <label for="password1">Confirm Password</label>
         </div>
        <div class="g-recaptcha " data-sitekey="6LcEIV4fAAAAAOdJAIdLDUiI5zddbIk8zzWHgM5W" required></div>
@@ -97,6 +113,8 @@
       <small class="d-block  p-2" >Back to <a href="/login">Login</a></small>
     </main>
 </div>
+
+
 <script>
 (function () {
   'use strict'

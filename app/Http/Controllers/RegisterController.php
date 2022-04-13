@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Session;
 
 class RegisterController extends Controller
@@ -17,14 +18,24 @@ class RegisterController extends Controller
 
         ]);
     }
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'g-recaptcha-response' => 'required|captcha'
 
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'picname' => 'required',
+            'companyname' => 'required',
+            'email' => 'required|email:dns|unique:users',
+            'group' => 'required',
+            'type' => 'required',
+            'channel' => 'required',
+            'password' => 'required'
         ]);
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        User::create($validatedData);
+
+
+
+        return redirect('/login')->with('success', 'Registration successfull! Please Login');
     }
 }
